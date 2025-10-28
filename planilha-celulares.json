@@ -1,0 +1,1090 @@
+{
+  "name": "planilha-celulares",
+  "nodes": [
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1sjUhQa8Qf5E9Sg2si1O8T2qcplSgruRhH1iBxvU0c0k",
+          "mode": "list",
+          "cachedResultName": "Planilha de Celulares",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1sjUhQa8Qf5E9Sg2si1O8T2qcplSgruRhH1iBxvU0c0k/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 2077910088,
+          "mode": "list",
+          "cachedResultName": "QR Tokens",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1sjUhQa8Qf5E9Sg2si1O8T2qcplSgruRhH1iBxvU0c0k/edit#gid=2077910088"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "token": "={{$json.token}}",
+            "email": "={{$json.email}}",
+            "expiresAt": "={{$json.expiresAt}}",
+            "createdAt": "={{ Date.now() }}",
+            "used": "={{false}}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "token",
+              "displayName": "token",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "expiresAt",
+              "displayName": "expiresAt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "createdAt",
+              "displayName": "createdAt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "used",
+              "displayName": "used",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "usedAt",
+              "displayName": "usedAt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        192,
+        352
+      ],
+      "id": "cff2700e-5871-4f14-b7a8-9cb56fbbcdf1",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "AdG1Kcye8dO5R9ZU",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "2ea354bd-e5e1-44bd-ac29-876445c88605",
+              "name": "scanUrl",
+              "value": "={{ 'http://localhost:5678/webhook/qr/scan?token=' + $node[\"CRIAR_TOKEN\"].json.token }}",
+              "type": "string"
+            },
+            {
+              "id": "5a98e321-18ec-4ec0-8822-26d896c249e0",
+              "name": "=email",
+              "value": "={{$node[\"CRIAR_TOKEN\"].json.email}}",
+              "type": "string"
+            },
+            {
+              "id": "bd61ca66-f839-4469-a5e8-671ac0df0ca7",
+              "name": "=expiresAt",
+              "value": "={{$node[\"CRIAR_TOKEN\"].json.expiresAt}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        432,
+        352
+      ],
+      "id": "f4a01aa0-f2f2-4cf0-a894-bc6459351acc",
+      "name": "MONTAR_URL"
+    },
+    {
+      "parameters": {
+        "jsCode": "const email = $json.query?.email || $json.email;\nif (!email) throw new Error('Email nao informado');\n\nconst token = Date.now().toString(36) + Math.random().toString(36).slice(2,10);\nconst ttlMinutes = 5;\nconst now = Date.now();\nconst expiresAt = now + ttlMinutes * 60 * 1000;\n\nreturn [{ json: { email, token, expiresAt, createdAt: now, ttlMinutes } }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -32,
+        352
+      ],
+      "id": "b6305307-a9a0-4e99-898f-41cf085925b9",
+      "name": "CRIAR_TOKEN"
+    },
+    {
+      "parameters": {
+        "path": "qr/new",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -256,
+        352
+      ],
+      "id": "f9d74e55-e0df-4b5a-8e31-12f89f11ed43",
+      "name": "Webhook",
+      "webhookId": "1d1119c2-22d6-41a0-a6e6-67fcfbfc8144"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "=<html>\n<head>\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <style>\n    body {\n      font-family: sans-serif;\n      padding: 16px;\n      margin: 0;\n      display: flex;\n      flex-direction: column;\n      align-items: center;\n      max-width: 600px;\n      margin: 0 auto;\n    }\n    \n    h3 {\n      font-size: clamp(1.2rem, 5vw, 1.5rem);\n      margin: 0 0 16px 0;\n      text-align: center;\n    }\n    \n    p {\n      font-size: clamp(0.9rem, 4vw, 1rem);\n      margin: 8px 0;\n      text-align: center;\n      word-break: break-all;\n    }\n    \n    img {\n      image-rendering: pixelated;\n      width: 100%;\n      max-width: 240px;\n      height: auto;\n      margin: 16px 0;\n    }\n    \n    small {\n      font-size: clamp(0.75rem, 3.5vw, 0.875rem);\n      display: block;\n      margin-top: 8px;\n      text-align: center;\n    }\n    \n    a {\n      color: #0066cc;\n      word-break: break-all;\n    }\n  </style>\n</head>\n<body>\n  <h3>QR temporário (5 minutos)</h3>\n  <p>Email: <b>{{ $json.email }}</b></p>\n  <img\n    alt=\"QR\"\n    src=\"https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=1&data=${encodeURIComponent({{ $json.scanUrl }})}\"\n  />\n  <p>Link: <a href=\"{{ $json.scanUrl }}\">{{ $json.scanUrl }}</a></p>\n  <small>Expira: {{new Date(Number( $json.expiresAt )).toLocaleString('pt-BR')}}</small>\n</body>\n</html>",
+        "options": {
+          "responseCode": 200,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "text/html; charset=utf-8"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        672,
+        352
+      ],
+      "id": "8f09e20d-f8a2-4594-8755-730c0db55aa2",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "path": "qr/scan",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -240,
+        688
+      ],
+      "id": "0fe83c32-4aa5-4220-8979-49b52f98a80c",
+      "name": "SCAN_QR",
+      "webhookId": "3e744275-1d36-42c2-9072-82cf9c6bb63c"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "mode": "url",
+          "value": "https://docs.google.com/spreadsheets/d/1sjUhQa8Qf5E9Sg2si1O8T2qcplSgruRhH1iBxvU0c0k/edit?usp=drivesdk",
+          "__regex": "https:\\/\\/(?:drive|docs)\\.google\\.com(?:\\/.*|)\\/d\\/([0-9a-zA-Z\\-_]+)(?:\\/.*|)"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 2077910088,
+          "mode": "list",
+          "cachedResultName": "QR Tokens",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1sjUhQa8Qf5E9Sg2si1O8T2qcplSgruRhH1iBxvU0c0k/edit#gid=2077910088"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "token",
+              "lookupValue": "={{$json.query.token}}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -48,
+        688
+      ],
+      "id": "09e741a7-372f-4f5c-a24a-598e59ba37ae",
+      "name": "LKP_TOKEN",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "AdG1Kcye8dO5R9ZU",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1sjUhQa8Qf5E9Sg2si1O8T2qcplSgruRhH1iBxvU0c0k",
+          "mode": "list",
+          "cachedResultName": "Planilha de Celulares",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1sjUhQa8Qf5E9Sg2si1O8T2qcplSgruRhH1iBxvU0c0k/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Dados",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1sjUhQa8Qf5E9Sg2si1O8T2qcplSgruRhH1iBxvU0c0k/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": "={{ $('JUNTAR').item.json.row_number }}",
+            "Advertências": "={{$json.adv}}",
+            "Estado": "={{$json.est}}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "Token",
+              "displayName": "Token",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "sa",
+              "displayName": "sa",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Aluno",
+              "displayName": "Aluno",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Responsável",
+              "displayName": "Responsável",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Turma",
+              "displayName": "Turma",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Estado",
+              "displayName": "Estado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Advertências",
+              "displayName": "Advertências",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1552,
+        672
+      ],
+      "id": "1b913b68-5391-48ec-ba1b-e229778ab6c9",
+      "name": "ATUALIZA_ALUNO",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "AdG1Kcye8dO5R9ZU",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "b7945f92-b329-4a2a-8b72-873ddfc55d9b",
+              "name": "=email",
+              "value": "={{ $json.email\n   ?? $json['Email']\n   ?? $node[\"LKP_TOKEN\"].json.email\n   ?? $node[\"VALIDAR_TOKEN\"].json.email\n   ?? '' }}\n",
+              "type": "string"
+            },
+            {
+              "id": "73e76263-a9e4-4dc6-9f39-18a8a6bd861a",
+              "name": "=tokenRow",
+              "value": "={{ $json.row_number    ?? $json.rowNumber    ?? $node[\"LKP_TOKEN\"].json.row_number    ?? $node[\"LKP_TOKEN\"].json.rowNumber    ?? null }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        528,
+        672
+      ],
+      "id": "ed0295c0-4e22-4fc8-b540-19c2d649a46b",
+      "name": "KEEP_TOKEN"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1120,
+        672
+      ],
+      "id": "3c86b812-0aab-4111-881b-691747dd0c18",
+      "name": "JUNTAR"
+    },
+    {
+      "parameters": {
+        "jsCode": "// pega dados\nconst aluno = $json.aluno || $json['Aluno'] || {};\nconst advNow = Number($json['Advertências'] || $json.adv || 0);\nconst estadoNow = Number($json['Estado'] || $json.est || 0);\n\nlet newAdv = advNow + 1;\nlet newEst = estadoNow;\nif (newAdv >= 3) {\n  newAdv = 0;\n  newEst = estadoNow + 1;\n}\n\n// devolve\nreturn [{ json: {\n  row_number: $json.row_number || $json.rowNumber || $node['LKP_ALUNO'].json.row_number,\n  adv: newAdv,\n  est: newEst,\n  alunoNome: $json.Aluno || $json.aluno || '',\n  responsavelEmail: $json.Responsável || $json.responsavel || ''\n}}];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1328,
+        672
+      ],
+      "id": "ced1114e-df26-4ea8-ae04-775b6284aaf7",
+      "name": "CALCULA"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1sjUhQa8Qf5E9Sg2si1O8T2qcplSgruRhH1iBxvU0c0k",
+          "mode": "list",
+          "cachedResultName": "Planilha de Celulares",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1sjUhQa8Qf5E9Sg2si1O8T2qcplSgruRhH1iBxvU0c0k/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 2077910088,
+          "mode": "list",
+          "cachedResultName": "QR Tokens",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1sjUhQa8Qf5E9Sg2si1O8T2qcplSgruRhH1iBxvU0c0k/edit#gid=2077910088"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": "={{ $('VALIDAR_TOKEN').item.json.row_number }}",
+            "used": "={{true}}",
+            "usedAt": "={{ Date.now() }}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "token",
+              "displayName": "token",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "expiresAt",
+              "displayName": "expiresAt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "createdAt",
+              "displayName": "createdAt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "used",
+              "displayName": "used",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "usedAt",
+              "displayName": "usedAt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1776,
+        672
+      ],
+      "id": "e745d872-af8c-49ed-af78-6506bd785302",
+      "name": "MARCA_TOKEN_USADO",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "AdG1Kcye8dO5R9ZU",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('CALCULA').item.json.responsavelEmail }}",
+        "subject": "={{ `Colégio Satélite - Advertência por uso de celular – ${$('JUNTAR').item.json.Aluno ?? 'Aluno'} (${ $('JUNTAR').item.json.Turma ?? ''})` }}\n",
+        "message": "={{ ( () => {\n  const n = $node[\"CALCULA\"].json;\n\n  const nome   = $('JUNTAR').item.json.Aluno ?? 'Aluno';\n  const turma  = n.turma ?? '';\n  const adv    = n.adv ?? '-';\n  const est    = n.est ?? '-';\n  const extra  = n.escalou ? ' (elevado nesta ocorrência)' : '';\n\n  return `\nPrezados responsáveis,<br><br>\nInformamos que o(a) aluno(a) <b>${nome}</b> recebeu <b>advertência</b> por uso indevido de celular durante a aula, em desacordo com a <b>Lei nº 15.100/2025</b>, que restringe o uso de aparelhos eletrônicos em ambiente escolar.<br><br>\nContamos com o apoio da família para reforçar o cumprimento das normas da escola.<br><br>\nAtenciosamente,<br>\n<b>Alissandra Leite</b><br>\nDiretora — Colégio Satélite<br><br>\nSituação atual:<br>\n• Advertências: ${adv} de 3<br>\n• Estado: ${est}${extra}<br><br>\nCoordenação Pedagógica\n`;\n})() }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        2064,
+        816
+      ],
+      "id": "9da5e12e-4e0e-4387-9cd1-7055b507eccb",
+      "name": "EMAIL_RESP",
+      "webhookId": "9f727474-51b0-4d32-90c5-9f0a60008d7d",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "fi2rSARnpj7BFcD1",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ ( () => {\n  const n = $node[\"CALCULA\"].json;\n  return `\n<html>\n<head>\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <style>\n    body {\n      font-family: sans-serif;\n      padding: 16px;\n      margin: 0;\n      display: flex;\n      flex-direction: column;\n      align-items: center;\n      max-width: 600px;\n      margin: 0 auto;\n    }\n    \n    h3 {\n      font-size: clamp(1.2rem, 5vw, 1.5rem);\n      margin: 0 0 16px 0;\n      text-align: center;\n    }\n    \n    p {\n      font-size: clamp(0.9rem, 4vw, 1rem);\n      margin: 8px 0;\n      text-align: center;\n      word-break: break-word;\n    }\n    \n    b {\n      font-weight: bold;\n    }\n  </style>\n</head>\n<body>\n  <h3>Advertência registrada</h3>\n  <p>Aluno: <b>${$('JUNTAR').item.json.Aluno ?? 'Aluno'}</b> — Turma: ${$('JUNTAR').item.json.Turma ?? ''}</p>\n  <p>Advertências atuais: ${n.adv ?? '-'} / 3</p>\n  <p>Estado: ${n.est ?? '-'} ${n.escalou ? '(elevado nesta ocorrência)' : ''}</p>\n</body>\n</html>`;\n})() }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        2240,
+        816
+      ],
+      "id": "6654c1f3-1485-4d92-a092-4f786e0176c7",
+      "name": "HTML_OK"
+    },
+    {
+      "parameters": {
+        "jsCode": "const tokenRow = $items('LKP_TOKEN')[0]?.json;\nif (!tokenRow) {\n  throw new Error('Token nao encontrado');\n}\nif (tokenRow.used === 'TRUE' || tokenRow.used === true) {\n  throw new Error('Token ja usado');\n}\n\n// Tentativa de correção se for segundos:\nif (Number(tokenRow.expiresAt) * 1000 < Date.now()) {\n    throw new Error('Token expirado');\n}\n\nreturn [{ json: tokenRow }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        144,
+        688
+      ],
+      "id": "abc9d775-f811-4ff1-8916-2506bc69c5f5",
+      "name": "VALIDAR_TOKEN"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "f89e624c-d84a-4010-988c-bc9081c4edfa",
+              "leftValue": "",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        336,
+        688
+      ],
+      "id": "344b62a5-e822-40cb-90b3-614cb872f8c6",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1sjUhQa8Qf5E9Sg2si1O8T2qcplSgruRhH1iBxvU0c0k",
+          "mode": "list",
+          "cachedResultName": "Planilha de Celulares",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1sjUhQa8Qf5E9Sg2si1O8T2qcplSgruRhH1iBxvU0c0k/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Dados",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1sjUhQa8Qf5E9Sg2si1O8T2qcplSgruRhH1iBxvU0c0k/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        704,
+        544
+      ],
+      "id": "d9684a26-7764-41c0-b6d7-071e1c31a62c",
+      "name": "GET_ALUNOS",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "AdG1Kcye8dO5R9ZU",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// normaliza para comparar \"sem frescura\"\nconst norm = s => (s ?? '').toString().trim().toLowerCase();\n\n// o email que veio do KEEP_TOKEN\nconst alvo = norm($node['KEEP_TOKEN'].json.email);\n\n// items = todas as linhas que o GET_ALUNOS trouxe\nconst linha = items.find(i =>\n    norm(i.json.Email) === alvo || norm(i.json.email) === alvo\n  );\n\n// versão com tratamento: sempre retorna 1 item e diz se achou\nif (!linha) {\n  return [{json: { ok: false, error: 'ALUNO_NAO_ENCONTRADO', emailProcurado: $node['KEEP_TOKEN'].json.email }}];\n}\n\n// inclui ok:true e mantém todos os campos da linha\nreturn [{ json: { ok:true, ...linha.json } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        896,
+        544
+      ],
+      "id": "7bb3f526-825f-450f-82e9-b3da81aedcee",
+      "name": "FIND_ALUNO"
+    },
+    {
+      "parameters": {
+        "sendTo": "ti@colegiosatelite.com.br, joao.vitor@colegiosatelite.com.br",
+        "subject": "={{ `Colégio Satélite - Advertência por uso de celular – ${$node[\"CALCULA\"].json.alunoNome || 'Aluno'} (${$node[\"JUNTAR\"].json.Turma || 'Turma não informada'})` }}",
+        "message": "={{ ( () => {\n  const calcula = $node[\"CALCULA\"].json;\n  const juntar = $node[\"JUNTAR\"].json;\n  \n  const nome   = calcula.alunoNome || juntar.Aluno || 'Aluno não identificado';\n  const turma  = calcula.turma || juntar.Turma || 'Turma não informada';\n  const adv    = calcula.adv || 0;\n  const est    = calcula.est || 0;\n  const extra  = calcula.escalou ? ' <span style=\"color: #d32f2f;\">(elevado nesta ocorrência)</span>' : '';\n  \n  return `\n<!DOCTYPE html>\n<html lang=\"pt-BR\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <style>\n    * {\n      margin: 0;\n      padding: 0;\n      box-sizing: border-box;\n    }\n    body {\n      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;\n      background-color: #f5f5f5;\n      padding: 20px;\n    }\n    .email-container {\n      max-width: 650px;\n      margin: 0 auto;\n      background: white;\n      border-radius: 12px;\n      overflow: hidden;\n      box-shadow: 0 4px 20px rgba(0,0,0,0.1);\n    }\n    .header {\n      background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);\n      color: white;\n      padding: 30px;\n      text-align: center;\n    }\n    .header-icon {\n      font-size: 48px;\n      margin-bottom: 10px;\n    }\n    .header h1 {\n      font-size: 24px;\n      font-weight: 600;\n      margin: 0;\n    }\n    .header p {\n      font-size: 14px;\n      opacity: 0.9;\n      margin-top: 5px;\n    }\n    .content {\n      padding: 40px 35px;\n      line-height: 1.7;\n      color: #333;\n    }\n    .greeting {\n      font-size: 15px;\n      margin-bottom: 25px;\n      color: #555;\n    }\n    .alert-box {\n      background: #fff3e0;\n      border-left: 5px solid #ff9800;\n      padding: 20px;\n      margin: 25px 0;\n      border-radius: 8px;\n    }\n    .alert-box strong {\n      color: #e65100;\n    }\n    .student-info {\n      background: #f8f9fa;\n      padding: 20px;\n      border-radius: 8px;\n      margin: 25px 0;\n    }\n    .student-info h2 {\n      font-size: 18px;\n      color: #d32f2f;\n      margin-bottom: 15px;\n      display: flex;\n      align-items: center;\n      gap: 8px;\n    }\n    .info-grid {\n      display: grid;\n      gap: 12px;\n    }\n    .info-item {\n      display: flex;\n      align-items: center;\n      padding: 12px;\n      background: white;\n      border-radius: 6px;\n      font-size: 15px;\n    }\n    .info-item .label {\n      font-weight: 600;\n      color: #555;\n      min-width: 120px;\n    }\n    .info-item .value {\n      color: #333;\n    }\n    .footer {\n      background: #fafafa;\n      padding: 30px 35px;\n      border-top: 1px solid #e0e0e0;\n    }\n    .signature {\n      font-size: 15px;\n      color: #333;\n    }\n    .signature strong {\n      color: #d32f2f;\n    }\n    .legal-notice {\n      margin-top: 20px;\n      padding-top: 20px;\n      border-top: 1px solid #e0e0e0;\n      font-size: 12px;\n      color: #777;\n      line-height: 1.6;\n    }\n    .divider {\n      height: 1px;\n      background: linear-gradient(to right, transparent, #e0e0e0, transparent);\n      margin: 30px 0;\n    }\n  </style>\n</head>\n<body>\n  <div class=\"email-container\">\n    <!-- Header -->\n    <div class=\"header\">\n      <div class=\"header-icon\">⚠️</div>\n      <h1>Registro de Advertência</h1>\n      <p>Sistema de Gestão Escolar</p>\n    </div>\n    \n    <!-- Content -->\n    <div class=\"content\">\n      <p class=\"greeting\">Prezados membros da Coordenação e da Equipe de TI,</p>\n      \n      <div class=\"alert-box\">\n        📱 Comunicamos que o(a) aluno(a) <strong>${nome}</strong>, da turma <strong>${turma}</strong>, recebeu uma <strong>advertência</strong> por uso indevido de celular durante o horário de aula, em descumprimento à <strong>Lei nº 15.100/2025</strong>, que restringe o uso de dispositivos eletrônicos em ambiente escolar.\n      </div>\n      \n      <p>A ocorrência foi registrada no sistema e encontra-se disponível para acompanhamento administrativo.</p>\n      \n      <div class=\"divider\"></div>\n      \n      <!-- Student Status -->\n      <div class=\"student-info\">\n        <h2>📊 Situação Atual do Aluno</h2>\n        <div class=\"info-grid\">\n          <div class=\"info-item\">\n            <span class=\"label\">👤 Aluno(a):</span>\n            <span class=\"value\"><strong>${nome}</strong></span>\n          </div>\n          <div class=\"info-item\">\n            <span class=\"label\">🎓 Turma:</span>\n            <span class=\"value\">${turma}</span>\n          </div>\n          <div class=\"info-item\">\n            <span class=\"label\">⚠️ Advertências:</span>\n            <span class=\"value\"><strong>${adv} de 3</strong></span>\n          </div>\n          <div class=\"info-item\">\n            <span class=\"label\">📈 Estado:</span>\n            <span class=\"value\"><strong>${est}</strong>${extra}</span>\n          </div>\n        </div>\n      </div>\n      \n      ${adv === 3 ? `\n      <div style=\"background: #ffebee; border: 2px solid #ef5350; padding: 15px; border-radius: 8px; margin-top: 20px;\">\n        <strong style=\"color: #c62828;\">⚠️ ATENÇÃO:</strong> \n        <span style=\"color: #c62828;\">Este aluno atingiu o limite máximo de advertências. Medidas disciplinares adicionais podem ser necessárias.</span>\n      </div>\n      ` : ''}\n    </div>\n    \n    <!-- Footer -->\n    <div class=\"footer\">\n      <div class=\"signature\">\n        <p>Atenciosamente,</p>\n        <p><strong>Equipe de TI do Colégio Satélite</strong></p>\n        <p style=\"color: #777; font-size: 13px; margin-top: 5px;\">Diretora — Colégio Satélite</p>\n      </div>\n      \n      <div class=\"legal-notice\">\n        <p><strong>Coordenação Pedagógica</strong></p>\n        <p>Este e-mail foi enviado automaticamente pelo sistema de gestão escolar. Para mais informações, entre em contato com a coordenação.</p>\n        <p style=\"margin-top: 10px;\">---<br>\n        <em>This email was sent automatically with n8n</em></p>\n      </div>\n    </div>\n  </div>\n</body>\n</html>\n`;\n})() }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        2064,
+        560
+      ],
+      "id": "745b643b-1cac-427e-899d-f59d9541a63a",
+      "name": "EMAIL_FUNCIONARIOS",
+      "webhookId": "fa69f1b6-68a3-4067-a1cf-98b4faacc52b",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "fi2rSARnpj7BFcD1",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1sjUhQa8Qf5E9Sg2si1O8T2qcplSgruRhH1iBxvU0c0k",
+          "mode": "list",
+          "cachedResultName": "Planilha de Celulares",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1sjUhQa8Qf5E9Sg2si1O8T2qcplSgruRhH1iBxvU0c0k/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Dados",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1sjUhQa8Qf5E9Sg2si1O8T2qcplSgruRhH1iBxvU0c0k/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -32,
+        144
+      ],
+      "id": "5c55ae94-7e25-439b-8be7-4d633b674e76",
+      "name": "GET_ALUNOS1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "AdG1Kcye8dO5R9ZU",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "path": "api/alunos",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -256,
+        144
+      ],
+      "id": "04b653b4-4f7a-41d6-aa6e-d453e81b22ca",
+      "name": "Webhook GET",
+      "webhookId": "4015a14f-4a83-48df-9e5f-cccc1bd0268b"
+    },
+    {
+      "parameters": {
+        "jsCode": "// pega a query enviada pelo formulário (/webhook/api/alunos?q=...)\nconst qRaw = String($node['Webhook GET']?.json?.query?.q || '').trim();\nif (!qRaw) {\n  return [{ json: { results: [] } }];\n}\n\n// normaliza (minúsculas, remove acentos)\nconst normalize = s => String(s || '').toLowerCase().normalize('NFD').replace(/\\p{Diacritic}/gu, '');\n\n// divide em termos\nconst terms = qRaw.split(/\\s+/).map(normalize);\n\n// pega as linhas do sheet (GET_ALUNOS1)\nconst rows = $items('GET_ALUNOS1').map(i => i.json || {});\nconst take = 20;\n\n// filtra\nconst matches = rows.filter(r => {\n  const nome  = normalize(r['Aluno'] || r['aluno'] || '');\n  const turma = normalize(r['Turma'] || r['turma'] || '');\n  const mail  = normalize(r['Email'] || r['email'] || '');\n  const all = `${nome} ${turma} ${mail}`;\n  // exige que todos os termos digitados estejam presentes\n  return terms.every(t => all.includes(t));\n}).slice(0, take);\n\n// monta resultado para o front (label e email)\nconst results = matches.map(r => ({\n  email: r['Email'] || r['email'] || '',\n  label: `${r['Aluno'] || r['aluno'] || ''} — ${r['Turma'] || r['turma'] || ''}`\n}));\n\nreturn [{ json: { results } }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        176,
+        144
+      ],
+      "id": "5f9f06a8-ab39-4411-992d-607f203616b3",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{$json.results}}",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        416,
+        144
+      ],
+      "id": "32742664-3e01-4086-ac7f-3c9ebcbfd62c",
+      "name": "Respond to Webhook1"
+    },
+    {
+      "parameters": {
+        "path": "qr",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -256,
+        -32
+      ],
+      "id": "5cda6e6c-1de1-4195-a3c2-491c69bba0fd",
+      "name": "Webhook1",
+      "webhookId": "bb31c117-93e4-484f-b4cf-394e7db825d6"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ ( () => {\n  const apiURL = 'http://localhost:5678/webhook/api/alunos';\n  const action = 'http://localhost:5678/webhook/qr/new';\n  return `\n<!doctype html>\n<html>\n<head>\n<meta charset=\"utf-8\" />\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n<title>Gerar QR</title>\n<style>\n  * {\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n  }\n  \n  :root {\n    --bg: #0f172a;\n    --panel: #111827;\n    --text: #e2e8f0;\n    --muted: #94a3b8;\n    --brand: #2563eb;\n    --hover: #1e293b;\n    --border: #334155;\n  }\n  \n  body {\n    background: var(--bg);\n    color: var(--text);\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;\n    min-height: 100vh;\n    padding: 16px;\n  }\n  \n  .wrap {\n    max-width: 720px;\n    width: 100%;\n    margin: 0 auto;\n    padding: 32px 24px;\n    background: var(--panel);\n    border-radius: 16px;\n    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);\n  }\n  \n  h1 {\n    margin: 0 0 8px;\n    font-size: 28px;\n    font-weight: 600;\n  }\n  \n  .sub {\n    color: var(--muted);\n    margin: 0 0 24px;\n    font-size: 15px;\n    line-height: 1.5;\n  }\n  \n  .input-wrapper {\n    position: relative;\n    width: 100%;\n    margin-bottom: 12px;\n  }\n  \n  input {\n    width: 100%;\n    font-size: 16px;\n    padding: 14px 16px;\n    border-radius: 10px;\n    border: 2px solid var(--border);\n    background: #0b1220;\n    color: var(--text);\n    transition: all 0.2s ease;\n    outline: none;\n  }\n  \n  input:focus {\n    border-color: var(--brand);\n    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);\n  }\n  \n  input::placeholder {\n    color: #64748b;\n  }\n  \n  ul#resultados {\n    list-style: none;\n    margin: 0;\n    padding: 0;\n    border-radius: 10px;\n    overflow: hidden;\n    background: #0b1220;\n  }\n  \n  ul#resultados:empty {\n    display: none;\n  }\n  \n  li.sug {\n    padding: 14px 16px;\n    border-bottom: 1px solid var(--hover);\n    cursor: pointer;\n    transition: all 0.15s ease;\n    font-size: 15px;\n    line-height: 1.5;\n  }\n  \n  li.sug:last-child {\n    border-bottom: none;\n  }\n  \n  li.sug:hover {\n    background: var(--hover);\n    padding-left: 20px;\n  }\n  \n  li.sug:active {\n    background: #0f172a;\n  }\n  \n  /* Responsividade para celular */\n  @media (max-width: 768px) {\n    body {\n      padding: 12px;\n    }\n    \n    .wrap {\n      padding: 24px 20px;\n      border-radius: 12px;\n      margin-top: 20px;\n    }\n    \n    h1 {\n      font-size: 24px;\n    }\n    \n    .sub {\n      font-size: 14px;\n      margin-bottom: 20px;\n    }\n    \n    input {\n      font-size: 16px; /* Manter 16px para evitar zoom no iOS */\n      padding: 12px 14px;\n    }\n    \n    li.sug {\n      padding: 12px 14px;\n      font-size: 14px;\n    }\n  }\n  \n  @media (max-width: 480px) {\n    .wrap {\n      padding: 20px 16px;\n    }\n    \n    h1 {\n      font-size: 22px;\n    }\n    \n    input {\n      padding: 12px;\n    }\n  }\n  \n  /* Melhorias para toque em dispositivos móveis */\n  @media (hover: none) and (pointer: coarse) {\n    li.sug {\n      padding: 16px;\n      font-size: 15px;\n    }\n    \n    li.sug:hover {\n      padding-left: 16px; /* Remove animação no hover para mobile */\n    }\n    \n    li.sug:active {\n      background: var(--brand);\n      color: white;\n    }\n  }\n</style>\n</head>\n<body>\n  <div class=\"wrap\">\n    <h1>Gerar QR de advertência</h1>\n    <p class=\"sub\">Digite o nome, turma ou e-mail do aluno:</p>\n    <div class=\"input-wrapper\">\n      <input type=\"text\" id=\"busca\" autocomplete=\"off\" placeholder=\"ex: maria@colegio...\" />\n    </div>\n    <ul id=\"resultados\"></ul>\n  </div>\n<script>\nconst busca = document.getElementById('busca');\nconst lista = document.getElementById('resultados');\nconst api = '${apiURL}';\nconst action = '${action}';\n\nbusca.addEventListener('input', async () => {\n  const q = busca.value.trim();\n  if (!q) { \n    lista.innerHTML = ''; \n    return; \n  }\n  \n  try {\n    const res = await fetch(api + '?q=' + encodeURIComponent(q));\n    if (!res.ok) throw new Error('HTTP ' + res.status);\n    const dados = await res.json();\n    \n    if (dados.length === 0) {\n      lista.innerHTML = '<li class=\"sug\" style=\"cursor: default; color: var(--muted);\">Nenhum aluno encontrado</li>';\n      return;\n    }\n    \n    lista.innerHTML = dados.map(d =>\n      '<li class=\"sug\" data-email=\"' + d.email + '\">' + d.label + '</li>'\n    ).join('');\n  } catch (err) {\n    console.error('Falha na API:', err);\n    lista.innerHTML = '<li class=\"sug\" style=\"cursor: default; color: #ef4444;\">❌ Não foi possível buscar alunos.</li>';\n  }\n});\n\nlista.addEventListener('click', e => {\n  const li = e.target.closest('.sug');\n  if (!li || !li.dataset.email) return;\n  const email = li.dataset.email;\n  window.location.href = action + '?email=' + encodeURIComponent(email);\n});\n</script>\n</body>\n</html>`;\n})() }}",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "text/html; charset=utf-8"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        -48,
+        -32
+      ],
+      "id": "a372dd97-238d-4aee-996e-4cf94a18d34c",
+      "name": "RESP_FORM"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "CRIAR_TOKEN": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MONTAR_URL": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "CRIAR_TOKEN",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet": {
+      "main": [
+        [
+          {
+            "node": "MONTAR_URL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SCAN_QR": {
+      "main": [
+        [
+          {
+            "node": "LKP_TOKEN",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "LKP_TOKEN": {
+      "main": [
+        [
+          {
+            "node": "VALIDAR_TOKEN",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ATUALIZA_ALUNO": {
+      "main": [
+        [
+          {
+            "node": "MARCA_TOKEN_USADO",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "KEEP_TOKEN": {
+      "main": [
+        [
+          {
+            "node": "JUNTAR",
+            "type": "main",
+            "index": 1
+          },
+          {
+            "node": "GET_ALUNOS",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "JUNTAR": {
+      "main": [
+        [
+          {
+            "node": "CALCULA",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CALCULA": {
+      "main": [
+        [
+          {
+            "node": "ATUALIZA_ALUNO",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MARCA_TOKEN_USADO": {
+      "main": [
+        [
+          {
+            "node": "EMAIL_RESP",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "EMAIL_FUNCIONARIOS",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "EMAIL_RESP": {
+      "main": [
+        [
+          {
+            "node": "HTML_OK",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "VALIDAR_TOKEN": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "KEEP_TOKEN",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GET_ALUNOS": {
+      "main": [
+        [
+          {
+            "node": "FIND_ALUNO",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "FIND_ALUNO": {
+      "main": [
+        [
+          {
+            "node": "JUNTAR",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GET_ALUNOS1": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook GET": {
+      "main": [
+        [
+          {
+            "node": "GET_ALUNOS1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook1": {
+      "main": [
+        [
+          {
+            "node": "RESP_FORM",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "a90b9b36-c5b9-42ed-a37e-b6afd20e276e",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "f7ad0e67e721fb54f5fc42cdddda64910f33427602b37d914dbf1a2fcde65fa1"
+  },
+  "id": "3xFR7yxxbl3Q9pUa",
+  "tags": []
+}
