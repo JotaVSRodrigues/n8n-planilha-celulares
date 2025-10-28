@@ -92,10 +92,10 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        192,
-        352
+        864,
+        224
       ],
-      "id": "cff2700e-5871-4f14-b7a8-9cb56fbbcdf1",
+      "id": "127cb436-0fdb-41e8-81f2-b9aef96c8d4d",
       "name": "Append row in sheet",
       "credentials": {
         "googleSheetsOAuth2Api": {
@@ -133,10 +133,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        432,
-        352
+        1104,
+        224
       ],
-      "id": "f4a01aa0-f2f2-4cf0-a894-bc6459351acc",
+      "id": "ca39bd4e-3a54-4834-b1da-5c51255a7482",
       "name": "MONTAR_URL"
     },
     {
@@ -146,10 +146,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -32,
-        352
+        640,
+        224
       ],
-      "id": "b6305307-a9a0-4e99-898f-41cf085925b9",
+      "id": "aefbebb4-3a90-4231-ae31-d93096c8b1a1",
       "name": "CRIAR_TOKEN"
     },
     {
@@ -161,10 +161,10 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -256,
-        352
+        416,
+        224
       ],
-      "id": "f9d74e55-e0df-4b5a-8e31-12f89f11ed43",
+      "id": "e19374c0-fb76-4404-bd41-7c1b8a6d1384",
       "name": "Webhook",
       "webhookId": "1d1119c2-22d6-41a0-a6e6-67fcfbfc8144"
     },
@@ -187,10 +187,10 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.4,
       "position": [
-        672,
-        352
+        1344,
+        224
       ],
-      "id": "8f09e20d-f8a2-4594-8755-730c0db55aa2",
+      "id": "9b6f9a18-2076-4357-84d3-0d60ee2aec55",
       "name": "Respond to Webhook"
     },
     {
@@ -202,10 +202,10 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -240,
-        688
+        432,
+        560
       ],
-      "id": "0fe83c32-4aa5-4220-8979-49b52f98a80c",
+      "id": "2a647fb7-7968-468b-81fd-e22abe12b5e3",
       "name": "SCAN_QR",
       "webhookId": "3e744275-1d36-42c2-9072-82cf9c6bb63c"
     },
@@ -237,10 +237,10 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -48,
-        688
+        624,
+        560
       ],
-      "id": "09e741a7-372f-4f5c-a24a-598e59ba37ae",
+      "id": "891799b1-1aa1-4418-893b-eb991a4c4455",
       "name": "LKP_TOKEN",
       "credentials": {
         "googleSheetsOAuth2Api": {
@@ -375,10 +375,10 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        1552,
-        672
+        2224,
+        544
       ],
-      "id": "1b913b68-5391-48ec-ba1b-e229778ab6c9",
+      "id": "6a10e3b1-5931-4c48-ae60-3e448103468b",
       "name": "ATUALIZA_ALUNO",
       "credentials": {
         "googleSheetsOAuth2Api": {
@@ -410,10 +410,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        528,
-        672
+        1200,
+        544
       ],
-      "id": "ed0295c0-4e22-4fc8-b540-19c2d649a46b",
+      "id": "ea6b0220-954b-4263-9754-56cdc5d546a7",
       "name": "KEEP_TOKEN"
     },
     {
@@ -425,10 +425,10 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        1120,
-        672
+        1792,
+        544
       ],
-      "id": "3c86b812-0aab-4111-881b-691747dd0c18",
+      "id": "67e76dd8-bc4d-405f-abd5-eb080714df59",
       "name": "JUNTAR"
     },
     {
@@ -438,10 +438,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1328,
-        672
+        2000,
+        544
       ],
-      "id": "ced1114e-df26-4ea8-ae04-775b6284aaf7",
+      "id": "c3dfc84a-09e3-4149-b055-1acdc248f721",
       "name": "CALCULA"
     },
     {
@@ -550,10 +550,10 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        1776,
-        672
+        2448,
+        544
       ],
-      "id": "e745d872-af8c-49ed-af78-6506bd785302",
+      "id": "0e0f6f0e-74cd-4fd0-9da5-b0ba24800f9b",
       "name": "MARCA_TOKEN_USADO",
       "credentials": {
         "googleSheetsOAuth2Api": {
@@ -572,10 +572,10 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.1,
       "position": [
-        2064,
-        816
+        2736,
+        688
       ],
-      "id": "9da5e12e-4e0e-4387-9cd1-7055b507eccb",
+      "id": "bc7431c5-d2f0-4c07-b834-b4a3151e5788",
       "name": "EMAIL_RESP",
       "webhookId": "9f727474-51b0-4d32-90c5-9f0a60008d7d",
       "credentials": {
@@ -594,10 +594,10 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.4,
       "position": [
-        2240,
-        816
+        2912,
+        688
       ],
-      "id": "6654c1f3-1485-4d92-a092-4f786e0176c7",
+      "id": "8e473949-f7b0-4054-84ad-8e86eb3b0301",
       "name": "HTML_OK"
     },
     {
@@ -607,10 +607,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        144,
-        688
+        816,
+        560
       ],
-      "id": "abc9d775-f811-4ff1-8916-2506bc69c5f5",
+      "id": "50383f1a-750f-433d-8f67-bf7286ee4ccb",
       "name": "VALIDAR_TOKEN"
     },
     {
@@ -641,10 +641,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        336,
-        688
+        1008,
+        560
       ],
-      "id": "344b62a5-e822-40cb-90b3-614cb872f8c6",
+      "id": "e7fedfac-91b1-45fc-b70f-e263e3388819",
       "name": "If"
     },
     {
@@ -668,10 +668,10 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        704,
-        544
+        1376,
+        416
       ],
-      "id": "d9684a26-7764-41c0-b6d7-071e1c31a62c",
+      "id": "849ab953-6e58-4a43-8e5a-e12545d63971",
       "name": "GET_ALUNOS",
       "credentials": {
         "googleSheetsOAuth2Api": {
@@ -687,15 +687,15 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        896,
-        544
+        1568,
+        416
       ],
-      "id": "7bb3f526-825f-450f-82e9-b3da81aedcee",
+      "id": "850b0784-dd43-4e0b-990f-293577f7bf0f",
       "name": "FIND_ALUNO"
     },
     {
       "parameters": {
-        "sendTo": "ti@colegiosatelite.com.br, joao.vitor@colegiosatelite.com.br",
+        "sendTo": "seuemail@gmail.com",
         "subject": "={{ `Colégio Satélite - Advertência por uso de celular – ${$node[\"CALCULA\"].json.alunoNome || 'Aluno'} (${$node[\"JUNTAR\"].json.Turma || 'Turma não informada'})` }}",
         "message": "={{ ( () => {\n  const calcula = $node[\"CALCULA\"].json;\n  const juntar = $node[\"JUNTAR\"].json;\n  \n  const nome   = calcula.alunoNome || juntar.Aluno || 'Aluno não identificado';\n  const turma  = calcula.turma || juntar.Turma || 'Turma não informada';\n  const adv    = calcula.adv || 0;\n  const est    = calcula.est || 0;\n  const extra  = calcula.escalou ? ' <span style=\"color: #d32f2f;\">(elevado nesta ocorrência)</span>' : '';\n  \n  return `\n<!DOCTYPE html>\n<html lang=\"pt-BR\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <style>\n    * {\n      margin: 0;\n      padding: 0;\n      box-sizing: border-box;\n    }\n    body {\n      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;\n      background-color: #f5f5f5;\n      padding: 20px;\n    }\n    .email-container {\n      max-width: 650px;\n      margin: 0 auto;\n      background: white;\n      border-radius: 12px;\n      overflow: hidden;\n      box-shadow: 0 4px 20px rgba(0,0,0,0.1);\n    }\n    .header {\n      background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);\n      color: white;\n      padding: 30px;\n      text-align: center;\n    }\n    .header-icon {\n      font-size: 48px;\n      margin-bottom: 10px;\n    }\n    .header h1 {\n      font-size: 24px;\n      font-weight: 600;\n      margin: 0;\n    }\n    .header p {\n      font-size: 14px;\n      opacity: 0.9;\n      margin-top: 5px;\n    }\n    .content {\n      padding: 40px 35px;\n      line-height: 1.7;\n      color: #333;\n    }\n    .greeting {\n      font-size: 15px;\n      margin-bottom: 25px;\n      color: #555;\n    }\n    .alert-box {\n      background: #fff3e0;\n      border-left: 5px solid #ff9800;\n      padding: 20px;\n      margin: 25px 0;\n      border-radius: 8px;\n    }\n    .alert-box strong {\n      color: #e65100;\n    }\n    .student-info {\n      background: #f8f9fa;\n      padding: 20px;\n      border-radius: 8px;\n      margin: 25px 0;\n    }\n    .student-info h2 {\n      font-size: 18px;\n      color: #d32f2f;\n      margin-bottom: 15px;\n      display: flex;\n      align-items: center;\n      gap: 8px;\n    }\n    .info-grid {\n      display: grid;\n      gap: 12px;\n    }\n    .info-item {\n      display: flex;\n      align-items: center;\n      padding: 12px;\n      background: white;\n      border-radius: 6px;\n      font-size: 15px;\n    }\n    .info-item .label {\n      font-weight: 600;\n      color: #555;\n      min-width: 120px;\n    }\n    .info-item .value {\n      color: #333;\n    }\n    .footer {\n      background: #fafafa;\n      padding: 30px 35px;\n      border-top: 1px solid #e0e0e0;\n    }\n    .signature {\n      font-size: 15px;\n      color: #333;\n    }\n    .signature strong {\n      color: #d32f2f;\n    }\n    .legal-notice {\n      margin-top: 20px;\n      padding-top: 20px;\n      border-top: 1px solid #e0e0e0;\n      font-size: 12px;\n      color: #777;\n      line-height: 1.6;\n    }\n    .divider {\n      height: 1px;\n      background: linear-gradient(to right, transparent, #e0e0e0, transparent);\n      margin: 30px 0;\n    }\n  </style>\n</head>\n<body>\n  <div class=\"email-container\">\n    <!-- Header -->\n    <div class=\"header\">\n      <div class=\"header-icon\">⚠️</div>\n      <h1>Registro de Advertência</h1>\n      <p>Sistema de Gestão Escolar</p>\n    </div>\n    \n    <!-- Content -->\n    <div class=\"content\">\n      <p class=\"greeting\">Prezados membros da Coordenação e da Equipe de TI,</p>\n      \n      <div class=\"alert-box\">\n        📱 Comunicamos que o(a) aluno(a) <strong>${nome}</strong>, da turma <strong>${turma}</strong>, recebeu uma <strong>advertência</strong> por uso indevido de celular durante o horário de aula, em descumprimento à <strong>Lei nº 15.100/2025</strong>, que restringe o uso de dispositivos eletrônicos em ambiente escolar.\n      </div>\n      \n      <p>A ocorrência foi registrada no sistema e encontra-se disponível para acompanhamento administrativo.</p>\n      \n      <div class=\"divider\"></div>\n      \n      <!-- Student Status -->\n      <div class=\"student-info\">\n        <h2>📊 Situação Atual do Aluno</h2>\n        <div class=\"info-grid\">\n          <div class=\"info-item\">\n            <span class=\"label\">👤 Aluno(a):</span>\n            <span class=\"value\"><strong>${nome}</strong></span>\n          </div>\n          <div class=\"info-item\">\n            <span class=\"label\">🎓 Turma:</span>\n            <span class=\"value\">${turma}</span>\n          </div>\n          <div class=\"info-item\">\n            <span class=\"label\">⚠️ Advertências:</span>\n            <span class=\"value\"><strong>${adv} de 3</strong></span>\n          </div>\n          <div class=\"info-item\">\n            <span class=\"label\">📈 Estado:</span>\n            <span class=\"value\"><strong>${est}</strong>${extra}</span>\n          </div>\n        </div>\n      </div>\n      \n      ${adv === 3 ? `\n      <div style=\"background: #ffebee; border: 2px solid #ef5350; padding: 15px; border-radius: 8px; margin-top: 20px;\">\n        <strong style=\"color: #c62828;\">⚠️ ATENÇÃO:</strong> \n        <span style=\"color: #c62828;\">Este aluno atingiu o limite máximo de advertências. Medidas disciplinares adicionais podem ser necessárias.</span>\n      </div>\n      ` : ''}\n    </div>\n    \n    <!-- Footer -->\n    <div class=\"footer\">\n      <div class=\"signature\">\n        <p>Atenciosamente,</p>\n        <p><strong>Equipe de TI do Colégio Satélite</strong></p>\n        <p style=\"color: #777; font-size: 13px; margin-top: 5px;\">Diretora — Colégio Satélite</p>\n      </div>\n      \n      <div class=\"legal-notice\">\n        <p><strong>Coordenação Pedagógica</strong></p>\n        <p>Este e-mail foi enviado automaticamente pelo sistema de gestão escolar. Para mais informações, entre em contato com a coordenação.</p>\n        <p style=\"margin-top: 10px;\">---<br>\n        <em>This email was sent automatically with n8n</em></p>\n      </div>\n    </div>\n  </div>\n</body>\n</html>\n`;\n})() }}",
         "options": {}
@@ -703,10 +703,10 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.1,
       "position": [
-        2064,
-        560
+        2736,
+        432
       ],
-      "id": "745b643b-1cac-427e-899d-f59d9541a63a",
+      "id": "01f88011-aefa-4e81-ab38-1d7430d1547d",
       "name": "EMAIL_FUNCIONARIOS",
       "webhookId": "fa69f1b6-68a3-4067-a1cf-98b4faacc52b",
       "credentials": {
@@ -737,10 +737,10 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -32,
-        144
+        640,
+        16
       ],
-      "id": "5c55ae94-7e25-439b-8be7-4d633b674e76",
+      "id": "2ffb14dd-9391-489f-b70d-9a91057c1e85",
       "name": "GET_ALUNOS1",
       "credentials": {
         "googleSheetsOAuth2Api": {
@@ -758,10 +758,10 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -256,
-        144
+        416,
+        16
       ],
-      "id": "04b653b4-4f7a-41d6-aa6e-d453e81b22ca",
+      "id": "64ff089e-92cb-4d62-bed7-d54dd42a6417",
       "name": "Webhook GET",
       "webhookId": "4015a14f-4a83-48df-9e5f-cccc1bd0268b"
     },
@@ -772,10 +772,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        176,
-        144
+        848,
+        16
       ],
-      "id": "5f9f06a8-ab39-4411-992d-607f203616b3",
+      "id": "d854a47d-7484-4638-a867-d2efb09fd60c",
       "name": "Code in JavaScript"
     },
     {
@@ -796,10 +796,10 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.4,
       "position": [
-        416,
-        144
+        1088,
+        16
       ],
-      "id": "32742664-3e01-4086-ac7f-3c9ebcbfd62c",
+      "id": "9b2941c6-5041-41af-8803-acd25ed6a115",
       "name": "Respond to Webhook1"
     },
     {
@@ -811,10 +811,10 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -256,
-        -32
+        416,
+        -160
       ],
-      "id": "5cda6e6c-1de1-4195-a3c2-491c69bba0fd",
+      "id": "535fd6d4-0c2f-416b-8c2d-5ec2f28c8f59",
       "name": "Webhook1",
       "webhookId": "bb31c117-93e4-484f-b4cf-394e7db825d6"
     },
@@ -836,10 +836,10 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.4,
       "position": [
-        -48,
-        -32
+        624,
+        -160
       ],
-      "id": "a372dd97-238d-4aee-996e-4cf94a18d34c",
+      "id": "aa3bfd31-a850-4013-a902-4bc094866391",
       "name": "RESP_FORM"
     }
   ],
@@ -1076,15 +1076,14 @@
       ]
     }
   },
-  "active": true,
+  "active": false,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "a90b9b36-c5b9-42ed-a37e-b6afd20e276e",
+  "versionId": "1acfe2e6-a932-4db6-86d5-51f6514048fb",
   "meta": {
-    "templateCredsSetupCompleted": true,
     "instanceId": "f7ad0e67e721fb54f5fc42cdddda64910f33427602b37d914dbf1a2fcde65fa1"
   },
-  "id": "3xFR7yxxbl3Q9pUa",
+  "id": "7ltsHsdvRLccvhXL",
   "tags": []
 }
