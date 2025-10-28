@@ -912,28 +912,12 @@ Usamos [Conventional Commits](https://www.conventionalcommits.org/):
 
 ---
 
-## 📄 Licença
-
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
-
----
-
 ## 📞 Suporte
 
 Se você encontrar algum problema ou tiver dúvidas:
 
 1. Verifique a seção [Troubleshooting](#troubleshooting)
 2. Abra uma [Issue](https://github.com/seu-usuario/n8n-planilha-celulares/issues)
-3. Entre em contato com a equipe de TI
-
----
-
-## 🙏 Agradecimentos
-
-- [n8n.io](https://n8n.io/) - Plataforma de automação
-- [Google Sheets API](https://developers.google.com/sheets/api) - Integração com planilhas
-- [Gmail API](https://developers.google.com/gmail/api) - Envio de e-mails
-- Comunidade n8n
 
 ---
 
