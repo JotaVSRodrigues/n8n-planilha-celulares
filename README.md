@@ -1,4 +1,4 @@
-# Sistema de Gestão de Advertências - Uso de Celular em Ambiente Escolar
+# 📱 Sistema de Gestão de Advertências - Uso de Celular em Ambiente Escolar
 
 > Sistema automatizado para registro de advertências por uso indevido de celular, em conformidade com a **Lei nº 15.100/2025** do Estado de São Paulo.
 
@@ -10,24 +10,46 @@
 
 ## 📋 Índice
 
-- [Sobre o Projeto](#sobre-o-projeto)
-- [Funcionalidades](#funcionalidades)
-- [Arquitetura do Sistema](#arquitetura-do-sistema)
-- [Pré-requisitos](#pré-requisitos)
-- [Instalação](#instalação)
-- [Configuração](#configuração)
-- [Como Usar](#como-usar)
-- [Estrutura do Workflow](#estrutura-do-workflow)
-- [Endpoints da API](#endpoints-da-api)
-- [Troubleshooting](#troubleshooting)
-- [Contribuindo](#contribuindo)
-- [Licença](#licença)
+- [Sobre o Projeto](#-sobre-o-projeto)
+- [Funcionalidades](#-funcionalidades)
+- [Arquitetura do Sistema](#️-arquitetura-do-sistema)
+- [Pré-requisitos](#-pré-requisitos)
+- [Instalação](#-instalação)
+- [Configuração](#️-configuração)
+- [Como Usar](#-como-usar)
+- [Estrutura do Workflow](#-estrutura-do-workflow)
+- [Endpoints da API](#-endpoints-da-api)
+- [Troubleshooting](#-troubleshooting)
+- [Contribuindo](#-contribuindo)
+- [Licença](#-licença)
 
 ---
 
 ## 🎯 Sobre o Projeto
 
 Este sistema foi desenvolvido para automatizar o processo de registro de advertências por uso indevido de celular em ambiente escolar, conforme estabelecido pela **Lei nº 15.100/2025** do Estado de São Paulo.
+
+### 📸 Preview do Sistema
+
+<div align="center">
+  <img src="docs/images/tela-busca.png" alt="Tela de Busca" width="600"/>
+  <p><em>Tela de busca de alunos</em></p>
+</div>
+
+<div align="center">
+  <img src="docs/images/qr-code.png" alt="QR Code Gerado" width="600"/>
+  <p><em>QR Code temporário gerado</em></p>
+</div>
+
+<div align="center">
+  <img src="docs/images/confirmacao.png" alt="Confirmação" width="600"/>
+  <p><em>Confirmação de advertência registrada</em></p>
+</div>
+
+<div align="center">
+  <img src="docs/images/email-funcionarios.png" alt="E-mail Funcionários" width="600"/>
+  <p><em>E-mail automático enviado para a coordenação</em></p>
+</div>
 
 ### Contexto Legal
 
@@ -928,5 +950,5 @@ Se você encontrar algum problema ou tiver dúvidas:
 
 <div align="center">
   <p>Desenvolvido para promover um ambiente escolar mais focado e produtivo 😁</p>
-  <p>© 2024 - Sistema de Gestão de Advertências</p>
+  <p>2025 - Sistema de Gestão de Advertências</p>
 </div>
