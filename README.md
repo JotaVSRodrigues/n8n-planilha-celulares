@@ -32,22 +32,22 @@ Este sistema foi desenvolvido para automatizar o processo de registro de advert�
 ### 📸 Preview do Sistema
 
 <div align="center">
-  <img src="docs/images/tela-busca.png" alt="Tela de Busca" width="600"/>
+  <img src="https://github.com/JotaVSRodrigues/n8n-planilha-celulares/blob/main/docs/images/tela-busca.png" alt="Tela de Busca" width="600"/>
   <p><em>Tela de busca de alunos</em></p>
 </div>
 
 <div align="center">
-  <img src="docs/images/qr-code.png" alt="QR Code Gerado" width="600"/>
+  <img src="https://github.com/JotaVSRodrigues/n8n-planilha-celulares/blob/main/docs/images/qr-code.png" alt="QR Code Gerado" width="600"/>
   <p><em>QR Code temporário gerado</em></p>
 </div>
 
 <div align="center">
-  <img src="docs/images/confirmacao.png" alt="Confirmação" width="600"/>
+  <img src="https://github.com/JotaVSRodrigues/n8n-planilha-celulares/blob/main/docs/images/confirmacao.png" alt="Confirmação" width="600"/>
   <p><em>Confirmação de advertência registrada</em></p>
 </div>
 
 <div align="center">
-  <img src="docs/images/email-funcionarios.png" alt="E-mail Funcionários" width="600"/>
+  <img src="https://github.com/JotaVSRodrigues/n8n-planilha-celulares/blob/main/docs/images/email-funcionarios.png" alt="E-mail Funcionários" width="600"/>
   <p><em>E-mail automático enviado para a coordenação</em></p>
 </div>
 
