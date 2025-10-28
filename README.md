@@ -1,5 +1,4 @@
-# Planilha de Celulares com N8N
-# 📱 Sistema de Gestão de Advertências - Uso de Celular em Ambiente Escolar
+# Sistema de Gestão de Advertências - Uso de Celular em Ambiente Escolar
 
 > Sistema automatizado para registro de advertências por uso indevido de celular, em conformidade com a **Lei nº 15.100/2025** do Estado de São Paulo.
 
