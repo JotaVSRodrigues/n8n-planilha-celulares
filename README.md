@@ -21,7 +21,6 @@
 - [Endpoints da API](#-endpoints-da-api)
 - [Troubleshooting](#-troubleshooting)
 - [Contribuindo](#-contribuindo)
-- [Licença](#-licença)
 
 ---
 
@@ -90,7 +89,7 @@ Quando um aluno é flagrado usando o celular indevidamente, o sistema registra a
          │
          ▼
 ┌─────────────────┐
-│  Inspetor       │
+│  TI             │
 │  escaneia QR    │
 └────────┬────────┘
          │
