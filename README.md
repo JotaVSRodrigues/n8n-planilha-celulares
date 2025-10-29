@@ -4,7 +4,6 @@
 
 [![n8n](https://img.shields.io/badge/n8n-Latest-orange)](https://n8n.io/)
 [![Docker](https://img.shields.io/badge/Docker-Compose-blue)](https://www.docker.com/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 ---
 
